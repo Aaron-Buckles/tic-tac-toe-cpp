@@ -13,7 +13,8 @@ class TicTacToe
 
 	bool won_horizontal(int y);
 	bool won_vertical(int x);
-	// bool won_diagonal(int x, int y);
+	bool won_diagonal();
+	bool is_board_full();
 	
 public:
 	const int BOARD_SIZE = 3;

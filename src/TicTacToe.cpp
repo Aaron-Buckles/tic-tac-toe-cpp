@@ -40,13 +40,13 @@ bool TicTacToe::is_game_over(int lastMove)
 
 	if (won_horizontal(y)) return true;
 	if (won_vertical(x)) return true;
-	// if (won_diagonal(x, y)) return true;
+	if (won_diagonal()) return true;
 
-	// if (is_board_full())
-	// {
-	// 	draw = true;
-	// 	return true;
-	// }
+	if (is_board_full())
+	{
+		draw = true;
+		return true;
+	}
 
 	return false;
 }
@@ -69,7 +69,41 @@ bool TicTacToe::won_vertical(int x)
 	return true;
 }
 
-// bool TicTacToe::won_diagonal(int x, int y)
-// {
-// 	return false;
-// }
+bool TicTacToe::won_diagonal()
+{
+	bool downRightDiagonal = true;
+	for (int i = 0; i < BOARD_SIZE; ++i)
+	{
+		if (board[i][i] != currentPlayer)
+		{
+			downRightDiagonal = false;
+			break;
+		}
+	}
+	if (downRightDiagonal) return true;
+
+	// up-right diagonal
+	for (int i = 0; i < BOARD_SIZE; ++i)
+	{
+		if (board[BOARD_SIZE - i - 1][i] != currentPlayer)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool TicTacToe::is_board_full()
+{
+	for (int x = 0; x < BOARD_SIZE; ++x)
+	{
+		for(int y = 0; y < BOARD_SIZE; ++y)
+		{
+			if (board[y][x] == Player::None)
+			{
+				return false;
+			}
+		}
+	}
+	return true;
+}
